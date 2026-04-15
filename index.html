@@ -584,8 +584,6 @@
     }
     .link-bubble:active { transform: scale(0.95); background: #eff6ff; }
     .link-bubble svg { width: 18px; height: 18px; stroke: #3b82f6; }
-<style>
-  /* Class bảo vệ siêu an toàn để ẩn/hiện màn hình */
   .view-hidden { display: none !important; }
 
   /* ÉP KHUNG TÌM KIẾM CỐ ĐỊNH CHIỀU RỘNG 100% VÀ LUÔN NẰM DỌC */
@@ -616,8 +614,10 @@
 
   #sheet-actions { display: flex; flex-direction: column; width: 100%; gap: 10px; }
   #sheet-actions .link-bubble { display: flex; width: 100%; justify-content: center; box-sizing: border-box; margin: 0; font-size: 15px; padding: 14px; }
-.fab-chat-btn { position: absolute; bottom: 30px; right: 20px; width: 56px; height: 56px; background: linear-gradient(135deg, #3b82f6, #8b5cf6); border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0 10px 25px rgba(139, 92, 246, 0.4); cursor: pointer; border: none; font-size: 24px; color: white; transition: 0.3s; z-index: 50; }
-</style>
+  .fab-chat-btn { position: absolute; bottom: 30px; right: 20px; width: 56px; height: 56px; background: linear-gradient(135deg, #3b82f6, #8b5cf6); border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0 10px 25px rgba(139, 92, 246, 0.4); cursor: pointer; border: none; font-size: 24px; color: white; transition: 0.3s; z-index: 50; }
+  </style>
+ </head>
+<body>
 
 <div id="screen-docbot" class="screen-container">
   <div class="app-container" style="background: #f8fafc;">
@@ -661,9 +661,6 @@
   </div>
 </div>
 
-  </style>
-</head>
-<body>
   <audio id="bg-music" src="___link_nhac___" preload="auto"></audio>
   <div id="screen-home" class="screen-container active">
     <div class="main-card">
@@ -850,20 +847,6 @@
     </div>
   </div>
 </div>
-  <div id="screen-news-detail" class="screen-container" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 10000; background: white; display: none; flex-direction: column;">
-    <div style="padding: 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
-      <span style="font-weight: bold; color: #8b5cf6;">TRỢ LÝ TÓM TẮT</span>
-      <button onclick="closeNewsModal()" style="border:none; background:none; font-size: 24px;">✕</button>
-    </div>
-    <div style="flex: 1; padding: 20px; overflow-y: auto;">
-      <h2 id="news-detail-title" style="font-family: 'Lora', serif; font-size: 20px; margin-bottom: 15px;"></h2>
-      <div id="news-ai-content" style="font-family: 'Inter', sans-serif; line-height: 1.6; color: #334155;">
-         <em>Đang nhờ Thánh ca & Công giáo đọc tin và tóm tắt cho bạn...</em>
-      </div>
-      <hr style="margin: 25px 0; border: 0; border-top: 1px solid #eee;">
-      <a id="news-original-link" href="#" target="_blank" style="display: block; text-align: center; color: #3b82f6; text-decoration: none; font-weight: bold;">Đọc bài gốc tại Vatican News →</a>
-    </div>
-  </div>
   <script>
     const GAS_URL = "https://script.google.com/macros/s/AKfycbwLUJ1LlGYTcrgGFYsHA-DQbXtYefESftICflJ7JII_xN9IbAdkgibfZ2otCJHP41aeyg/exec";
 
@@ -1495,17 +1478,6 @@ function openDocBot() {
       })
       .catch(err => console.log(err));
   }
-}
-function closeDocBot() {
-  document.getElementById('screen-docbot').classList.remove('active');
-  document.getElementById('screen-home').classList.add('active');
-  
-  // Tự động Reset về màn hình Danh sách tìm kiếm để lần sau mở lên không bị kẹt ở màn hình Chat
-  document.getElementById('doc-chat-view').style.display = 'none';
-  document.getElementById('doc-main-view').style.display = 'flex';
-  document.getElementById('doc-title').innerText = "Tìm Kiếm Bài Hát";
-  document.getElementById('doc-subtitle').innerText = "\"Gõ tên hoặc chọn chủ đề...\"";
-  document.getElementById('fab-toggle').innerHTML = "💬";
 }
 
 function extractDynamicChips(songs) {
