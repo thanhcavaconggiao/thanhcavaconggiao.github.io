@@ -585,8 +585,6 @@
     .link-bubble:active { transform: scale(0.95); background: #eff6ff; }
     .link-bubble svg { width: 18px; height: 18px; stroke: #3b82f6; }
   .view-hidden { display: none !important; }
-
-  /* ÉP KHUNG TÌM KIẾM CỐ ĐỊNH CHIỀU RỘNG 100% VÀ LUÔN NẰM DỌC */
   #doc-main-view { display: flex; flex-direction: column !important; flex: 1; width: 100%; height: 100%; overflow: hidden; animation: fadeIn 0.3s ease; }
   
   .fast-search-input { width: 100%; box-sizing: border-box; border: 1px solid #e2e8f0; border-radius: 16px; padding: 14px 18px 14px 40px; font-size: 15px; outline: none; background: white url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="%2394a3b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>') no-repeat 14px center; font-family: 'Inter', sans-serif; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);}
@@ -944,25 +942,16 @@
       fbChatBox.insertBefore(div, typingFb);
       fbChatBox.scrollTop = fbChatBox.scrollHeight;
     }
-
-    // Xử lý nút Quick Reply
     document.getElementById('btn-quick-email').addEventListener('click', function(e) {
-      e.preventDefault(); // Ngăn chặn nút submit form mặc định
+      e.preventDefault(); 
       const fbMsg = document.getElementById('fb-msg');
-      
-      // Điền sẵn câu và tự động mở bàn phím
       fbMsg.value = "Thông tin liên hệ của tôi là: ";
       fbMsg.focus();
-      
-      // Điều chỉnh lại chiều cao khung chat cho khớp với chữ
       fbMsg.style.height = '24px';
       fbMsg.style.height = (fbMsg.scrollHeight) + 'px';
-      
-      // Ẩn nút gợi ý đi thật mượt
+
       document.getElementById('quick-reply-container').style.display = 'none';
     });
-    
-    // Ẩn nút Quick Reply nếu người dùng tự gõ chữ khác
     document.getElementById('fb-msg').addEventListener('input', function() {
       document.getElementById('quick-reply-container').style.display = 'none';
     });
@@ -1459,9 +1448,6 @@
       btn.classList.add('active');
     }
 
-// ==========================================
-// LOGIC KHO TÀI LIỆU (RAM CACHE, LIVE SEARCH & IMPRIMATUR)
-// ==========================================
 let globalSongsList = []; 
 let currentCategoryFilter = "";
 
@@ -1482,22 +1468,15 @@ function openDocBot() {
 
 function extractDynamicChips(songs) {
   let uniqueCats = [];
-  
-  // Lấy TẤT CẢ các chủ đề có trong danh sách bài hát
   for (let i = 0; i < songs.length; i++) {
     let cat = songs[i].category;
     if (cat && !uniqueCats.includes(cat)) {
       uniqueCats.push(cat);
-      // XÓA bỏ dòng break ở đây để không bị giới hạn 3 chủ đề nữa
     }
   }
   
   const chipContainer = document.getElementById('dynamic-category-chips');
-  
-  // Thêm style="margin-left: 12px;" để đẩy nút "Tất cả" xịch sang phải
   let html = `<button class="news-tab-btn tab-vn active" style="margin-left: 12px;" onclick="setSongFilter('', this)">Tất cả</button>`;
-  
-  // Mảng màu sẽ tự động lặp lại cho các chủ đề thứ 4, 5, 6...
   const colors = ['tab-tt', 'tab-en', 'tab-hv']; 
   
   uniqueCats.forEach((cat, index) => {
@@ -1556,7 +1535,6 @@ function renderSongList(list) {
   container.innerHTML = html;
 }
 
-// Hàm mở Bottom Sheet (Hiển thị nút Xanh/Đỏ và Cảnh báo)
 function openSongSheet(name, category, ytLink, pdfLink, hasWarning) {
   document.getElementById('sheet-song-name').innerText = name;
   document.getElementById('sheet-song-cat').innerText = category || "Thánh ca Công Giáo";
@@ -1600,7 +1578,6 @@ function requestDocument() {
   document.getElementById('screen-feedback').classList.add('active');
 }
 
-// Hàm quay lại an toàn
 function closeDocBot() {
   document.getElementById('screen-docbot').classList.remove('active');
   document.getElementById('screen-home').classList.add('active');
